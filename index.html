@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pa la cumpleañeraaa👻👻</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #1b2735;
+      overflow: hidden;
+      position: relative;
+      min-height: 100vh;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      text-align: center;
+      color: #ffb6d9;
+      margin-top: 10px;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .img {
+      position: absolute;
+      width: 140px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0);
+      transition: transform 0.3s;
+      z-index: 2;
+    }
+
+    .img:hover {
+      transform: rotate(3deg) scale(1.05);
+      z-index: 3;
+    }
+
+    .img-audio {
+      position: absolute;
+      width: 140px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0);
+      cursor: pointer;
+      transition: transform 0.3s;
+      left: 90vw;
+      top: 5vh;
+      z-index: 2;
+    }
+
+    .img-audio:hover {
+      transform: scale(1.1);
+    }
+
+    .hojas-suelo {
+      position: fixed;
+      bottom: -46px;
+      width: 100%;
+      height: 100px;
+      background: url('otoño.webp') repeat-x;
+      background-size: contain;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .capa1 { transform: scale(1) translateY(0px); opacity: 1; }
+    .capa2 { transform: scale(1.05) translateY(-10px); opacity: 0.85; }
+    .capa3 { transform: scale(1.1) translateY(-20px); opacity: 0.7; }
+
+    @keyframes blink {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.6); }
+    }
+
+    .boton-mensaje {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff69b400;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 onclick="mostrarVideo()">¡Feliz Cumpleaños, Vani!</h1>
+
+  <img src="babasonicos.jpg" class="img" style="top: 10vh; left: 5vw;" onclick="alert('Me gustaron las que me recomendaste, siempre tus gustos god')">
+  <img src="buck.webp" class="img" style="top: 13vh; left: 31vw;" onclick="alert('Algun dia me lo platinare, tu eres muy pro')">
+  <img src="chaufa.png" class="img" style="top: 16vh; left: 64vw;" onclick="alert('te falto acompañarlo con una inka kola helada xd')">
+  <img src="hollow.png" class="img" style="top: 60vh; left: 90vw;" onclick="alert('Avisame cuando lo juegues, yo te enseñare todo lo que se')">
+  <img src="zoey.png" class="img" style="top: 38vh; left: 5vw;" onclick="alert('Tambien eres pro en left :0')">
+  <img src="repos.png" class="img" style="top: 0vh; left: 65vw;" onclick="alert('Dale click al otro repo :D')">
+  <img src="sage.png" class="img" style="top: 37vh; left: 73vw;" onclick="alert('La practica hace a la maestra')">
+  <img src="tan bionica.jpg" class="img" style="top: 54vh; left: 26vw;" onclick="alert('Es tu banda favorita cierto?, espero no equivocarme D:')">
+  <img src="vani.png" class="img" style="top: 32vh; left: 47vw;" onclick="alert('Espero q hoy la pases muy bien, provecho con el pastel')">
+  <img src="repo.webp" alt="Imagen con canción" class="img-audio" onclick="document.getElementById('audio').play()">
+
+  <audio id="audio" src="I Love.mp3"></audio>
+
+  <div class="hojas-suelo capa1"></div>
+  <div class="hojas-suelo capa2"></div>
+  <div class="hojas-suelo capa3"></div>
+
+  <script>
+    window.onload = () => {
+      confetti({
+        particleCount: 250,
+        spread: 120,
+        origin: { y: 0.2 },
+        colors: ['#ff69b4', '#ffd6ec', '#ffffff']
+      });
+    };
+
+    const audio = document.getElementById('audio');
+    const imgAudio = document.querySelector('.img-audio');
+
+    audio.addEventListener('play', () => {
+      imgAudio.style.animation = "blink 1s infinite";
+    });
+
+    audio.addEventListener('pause', () => {
+      imgAudio.style.animation = "none";
+    });
+
+    audio.addEventListener('ended', () => {
+      imgAudio.style.animation = "none";
+    });
+
+  
+    setInterval(() => {
+      const hoja = document.createElement("img");
+      hoja.src = "hojitas.png";
+      hoja.style.position = "fixed";
+      hoja.style.width = Math.random() * 70 + 50 + "px";
+      hoja.style.top = "-50px";
+      hoja.style.left = Math.random() * 100 + "vw";
+      hoja.style.zIndex = "2";
+      hoja.style.opacity = Math.random() * 0.8 + 0.2;
+      hoja.style.transform = `rotate(${Math.random() * 360}deg)`;
+      hoja.style.transition = "transform 4s ease, top 4s ease";
+      document.body.appendChild(hoja);
+      setTimeout(() => {
+        hoja.style.top = "100vh";
+        hoja.style.transform += " rotate(360deg)";
+      }, 100);
+      setTimeout(() => hoja.remove(), 5000);
+    }, 500);
+
+    
+    function mostrarVideo() {
+      document.body.innerHTML = `
+        <video src="felizcum.mp4" autoplay style="width:100vw; height:100vh; object-fit:cover;"></video>
+      `;
+    }
+  </script>
+
+  
+  <button class="boton-mensaje" onclick="alert('Si encuentras esto, te debo algo, puedes pedir cualquier cosa kajskdja, que me sea posible obviamente xd, tampoco puedo volar como superman jasjkdka')"></button>
+
+</body>
+</html>
