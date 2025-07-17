@@ -53,6 +53,23 @@
       z-index: 3;
     }
 
+    .especial-marie {
+      box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.6), 0 0 30px 15px rgba(173, 216, 230, 0.3);
+      animation: resplandor 3s ease-in-out infinite;
+      border: 3px solid #a0eaff;
+    }
+
+    @keyframes resplandor {
+      0%, 100% {
+        box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.6), 0 0 30px 15px rgba(173, 216, 230, 0.3);
+        transform: scale(1.05);
+      }
+      50% {
+        box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.8), 0 0 50px 25px rgba(0, 255, 255, 0.4);
+        transform: scale(1.09);
+      }
+    }
+
     .img-audio {
       position: absolute;
       width: 140px;
@@ -103,6 +120,21 @@
       cursor: pointer;
       z-index: 5;
     }
+
+    #mensaje-secreto {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      font-weight: bold;
+      color: #55d6ea;
+      text-shadow: 2px 2px 10px #fff;
+      opacity: 0;
+      z-index: 100;
+      transition: opacity 1s ease;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -110,24 +142,45 @@
   <h1 onclick="mostrarVideo()">¡Feliz Cumpleaños, Vani!</h1>
 
   <img src="babasonicos.jpg" class="img" style="top: 10vh; left: 5vw;" onclick="alert('Me gustaron las que me recomendaste, siempre tus gustos god')">
-  <img src="buck.webp" class="img" style="top: 13vh; left: 31vw;" onclick="alert('Algun dia me lo platinare, tu eres muy pro')">
+  <img src="buck.webp" class="img" style="top: 13vh; left: 27vw;" onclick="alert('Algun dia me lo platinare, tu eres muy pro')">
+  <img src="marie.png" class="img especial-marie" style="top: 10vh; left: 45vw;" onclick="alert('Desde mi percepcion, tu eres inteligente y dedicada como marie curie🤓')">
   <img src="chaufa.png" class="img" style="top: 16vh; left: 64vw;" onclick="alert('te falto acompañarlo con una inka kola helada xd')">
   <img src="hollow.png" class="img" style="top: 60vh; left: 90vw;" onclick="alert('Avisame cuando lo juegues, yo te enseñare todo lo que se')">
   <img src="zoey.png" class="img" style="top: 38vh; left: 5vw;" onclick="alert('Tambien eres pro en left :0')">
   <img src="repos.png" class="img" style="top: 0vh; left: 65vw;" onclick="alert('Dale click al otro repo :D')">
   <img src="sage.png" class="img" style="top: 37vh; left: 73vw;" onclick="alert('La practica hace a la maestra')">
   <img src="tan bionica.jpg" class="img" style="top: 54vh; left: 26vw;" onclick="alert('Es tu banda favorita cierto?, espero no equivocarme D:')">
-  <img src="vani.png" class="img" style="top: 32vh; left: 47vw;" onclick="alert('Espero q hoy la pases muy bien, provecho con el pastel')">
+  <img src="vani.png" class="img" style="top: 37vh; left: 47vw;" onclick="document.getElementById('audio-fondo').play(); alert('Espero q hoy la pases muy bien, provecho con el pastel')">
   <img src="repo.webp" alt="Imagen con canción" class="img-audio" onclick="document.getElementById('audio').play()">
 
   <audio id="audio" src="I Love.mp3"></audio>
+  <audio id="audio-fondo" src="happy.mp3" autoplay loop></audio>
+  <audio id="audio-secreto" src="confeti.mp3"></audio>
 
   <div class="hojas-suelo capa1"></div>
   <div class="hojas-suelo capa2"></div>
   <div class="hojas-suelo capa3"></div>
 
+  <div id="mensaje-secreto">Feliz cumple vaniiiii!!!!🎉🎊🗣️🔥</div>
+
+  <button onclick="mostrarMensajeSecreto()" style="
+    position: fixed;
+    top: 143px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    opacity: 0.01;
+    cursor: pointer;
+    z-index: 10;
+  "></button>
+
+  <button class="boton-mensaje" onclick="alert('Si encuentras esto, te debo algo, puedes pedir cualquier cosa kajskdja, que me sea posible obviamente xd, tampoco puedo volar como superman jasjkdka')"></button>
+
   <script>
     window.onload = () => {
+      document.getElementById("audio-fondo").volume = 0.2;
       confetti({
         particleCount: 250,
         spread: 120,
@@ -151,7 +204,6 @@
       imgAudio.style.animation = "none";
     });
 
-  
     setInterval(() => {
       const hoja = document.createElement("img");
       hoja.src = "hojitas.png";
@@ -171,16 +223,32 @@
       setTimeout(() => hoja.remove(), 5000);
     }, 500);
 
-    
     function mostrarVideo() {
+      document.getElementById("audio-fondo").pause();
       document.body.innerHTML = `
         <video src="felizcum.mp4" autoplay style="width:100vw; height:100vh; object-fit:cover;"></video>
       `;
     }
-  </script>
 
-  
-  <button class="boton-mensaje" onclick="alert('Si encuentras esto, te debo algo, puedes pedir cualquier cosa kajskdja, que me sea posible obviamente xd, tampoco puedo volar como superman jasjkdka')"></button>
+    function mostrarMensajeSecreto() {
+      const mensaje = document.getElementById("mensaje-secreto");
+      const audioSorpresa = document.getElementById("audio-secreto");
+
+      mensaje.style.opacity = 1;
+      audioSorpresa.play();
+
+      confetti({
+        particleCount: 300,
+        spread: 180,
+        origin: { y: 0.6 },
+        colors: ['#ff69b4', '#ffd700', '#ffffff']
+      });
+
+      setTimeout(() => {
+        mensaje.style.opacity = 0;
+      }, 3000);
+    }
+  </script>
 
 </body>
 </html>
